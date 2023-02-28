@@ -271,7 +271,6 @@ function App() {
                   </AdminRoute>
                 }
               ></Route>
-
               <Route path="/" element={<HomeScreen />} />
             </Routes>
           </Container>

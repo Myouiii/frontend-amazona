@@ -39,6 +39,9 @@ export default function SigninScreen() {
     if (userInfo) {
       navigate(redirect);
     }
+    else{
+      return;
+    }
   }, [navigate, redirect, userInfo]);
 
   return (
