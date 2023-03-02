@@ -5,6 +5,8 @@ import Rating from './Rating';
 import { useContext } from 'react';
 import { Store } from '../Store';
 import { publicRequest } from '../requestMethod';
+import { ToastContainer, toast } from 'react-toastify';
+import { formatFixed } from '../utils';
 
 function Product(props) {
   const { product } = props;
@@ -22,12 +24,13 @@ function Product(props) {
       window.alert('Sorry. Product is out of stock');
       return;
     }
+    toast.success('add product successfully');
     ctxDispatch({
       type: 'CART_ADD_ITEM',
       payload: { ...item, quantity },
     });
   };
-
+  
   return (
     <Card>
       <Link to={`/product/${product.slug}`}>
@@ -38,7 +41,7 @@ function Product(props) {
           <Card.Title>{product.name}</Card.Title>
         </Link>
         <Rating rating={product.rating} numReviews={product.numReviews} />
-        <Card.Text>${product.price}</Card.Text>
+        <Card.Text>{formatFixed(product.price.toString())} vnđ</Card.Text>
         {product.countInStock === 0 ? (
           <Button variant="light" disabled>
             Out of stock
@@ -47,6 +50,8 @@ function Product(props) {
           <Button onClick={() => addToCartHandler(product)}>Add to cart</Button>
         )}
       </Card.Body>
+      <ToastContainer position="bottom-center" limit={1} />
+
     </Card>
   );
 }

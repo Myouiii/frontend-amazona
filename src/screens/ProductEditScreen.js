@@ -153,6 +153,7 @@ export default function ProductEditScreen() {
     setImages(images.filter((x) => x !== fileName));
     toast.success('Image removed successfully. click Update to apply it');
   };
+  
   return (
     <Container className="small-container">
       <Helmet>
