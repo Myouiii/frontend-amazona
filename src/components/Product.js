@@ -5,7 +5,7 @@ import Rating from './Rating';
 import { useContext } from 'react';
 import { Store } from '../Store';
 import { publicRequest } from '../requestMethod';
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import { formatFixed } from '../utils';
 
 function Product(props) {
@@ -50,7 +50,6 @@ function Product(props) {
           <Button onClick={() => addToCartHandler(product)}>Add to cart</Button>
         )}
       </Card.Body>
-      <ToastContainer position="bottom-center" limit={1} />
 
     </Card>
   );

@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Store } from '../Store';
 import { Helmet } from 'react-helmet-async';
+import {  toast } from 'react-toastify';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import MessageBox from '../components/MessageBox';
@@ -9,6 +10,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link, useNavigate } from 'react-router-dom';
 import { publicRequest } from '../requestMethod';
+import { formatFixed } from '../utils';
 
 export default function CartScreen() {
   const navigate = useNavigate();
@@ -29,6 +31,7 @@ export default function CartScreen() {
     });
   };
   const removeItemHandler = (item) => {
+    toast.success('Delete product successfully');
     ctxDispatch({ type: 'CART_REMOVE_ITEM', payload: item });
   };
 
@@ -82,7 +85,7 @@ export default function CartScreen() {
                         <i className="fas fa-plus-circle"></i>
                       </Button>
                     </Col>
-                    <Col md={3}>${item.price}</Col>
+                    <Col md={3}>{formatFixed(item.price.toString())} vnđ</Col>
                     <Col md={2}>
                       <Button
                         onClick={() => removeItemHandler(item)}
@@ -104,8 +107,8 @@ export default function CartScreen() {
                 <ListGroup.Item>
                   <h3>
                     Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
-                    items) : $
-                    {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
+                    items) <br/>: {' '}
+                    {formatFixed((cartItems.reduce((a, c) => a + c.price * c.quantity, 0)).toString())}{' vnđ'}
                   </h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
